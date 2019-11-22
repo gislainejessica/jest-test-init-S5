@@ -5,12 +5,12 @@ import '@testing-library/jest-dom/extend-expect'
 
 describe('TechList component', () => {
   it('should be able to add new tech', () => {
-    const { getByText , getByTestId, debug } = render(<TechList/>)
+    const { getByText , getByTestId, getByLabelText } = render(<TechList/>)
 
-    //debug()
-    fireEvent.click(getByText('Adicionar'))
-    //debug()
+    fireEvent.change(getByLabelText('Tech'), {target: { value: "NodeJs"}})
+    fireEvent.submit(getByTestId('tech-form'))
 
     expect(getByTestId('tech-list')).toContainElement(getByText('NodeJs'))
+    expect(getByLabelText('Tech')).toHaveValue('')
   } )
 })
