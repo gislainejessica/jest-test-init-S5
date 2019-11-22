@@ -17,7 +17,7 @@
     "testMatch": [
       "**/__tests__/**/*.test.js"
     ],
-    "setupFileAfterEnv": [
+    "setupFilesAfterEnv": [
       "@testing-library/react/cleanup-after-each",
       "@testing-library/jest-dom/extend-expect"
     ],
