@@ -1,5 +1,5 @@
 import React from 'react'
-import { render , fireEvent } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 import TechList from '~/components/TechList'
 import '@testing-library/jest-dom/extend-expect'
 
@@ -13,4 +13,17 @@ describe('TechList component', () => {
     expect(getByTestId('tech-list')).toContainElement(getByText('NodeJs'))
     expect(getByLabelText('Tech')).toHaveValue('')
   } )
+
+  it('should store tech in storage', () => {
+    let { getByText , getByTestId, getByLabelText } = render(<TechList/>)
+
+    fireEvent.change(getByLabelText('Tech'), {target: { value: "NodeJs"}})
+    fireEvent.submit(getByTestId('tech-form'))
+
+    cleanup()
+
+    ({ getByText , getByTestId, getByLabelText } = render(<TechList/>))
+    expect(getByTestId('tech-list')).toContainElement(getByText('NodeJs'))
+
+  })
 })
